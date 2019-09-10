@@ -29,6 +29,12 @@ public class User implements Serializable, UserDetails {
 
     private  String password;
 
+    private Integer githubId;
+
+    private String githubAvatar;
+
+    private String githubUrl;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (roles == null || roles.size() <= 0) {

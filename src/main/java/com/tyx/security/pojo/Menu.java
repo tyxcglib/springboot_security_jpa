@@ -1,6 +1,8 @@
 package com.tyx.security.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -15,6 +17,8 @@ import java.util.Set;
 @Setter
 @Table(name = "menu")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Menu implements Comparable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +32,8 @@ public class Menu implements Comparable{
 
     private Integer parentId;
 
-    private Integer order;  // 菜单排序
+    private Integer morder;  // 菜单排序
+
     @Transient
     private List<Menu> children;
 

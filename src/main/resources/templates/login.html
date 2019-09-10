@@ -1,14 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
+    <th:block th:include="common/resource::resource"></th:block>
 </head>
 <body>
-<form action="/login" method="post">
-    用户名 : <input type="text" name="username"/>
-    密码 :   <input type="password" name="password"/>
-    <input type="submit" value="登录">
-</form>
+    <div class="panel panel-primary" style="width: 500px;margin: 100px auto">
+        <div class="panel-heading">
+            <h3 class="panel-title">用户登陆</h3>
+        </div>
+        <div class="panel-body">
+            <form action="/login" method="post" class="form-horizontal" style="text-align: center">
+                <span th:text="${errMsg}" style="color:red;"></span>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        用户名
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="username" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                        密码
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                </div>
+                <div style="width: 150px;margin: 0 auto;">
+                    <button type="submit" class="btn btn-primary">登陆</button>
+                    <button type="reset" class="btn btn-danger">重置</button>
+                </div>
+            </form>
+
+            <div style="text-align: center;margin-top: 10px;">
+                <a href="https://github.com/login/oauth/authorize?client_id=7c6591e3f3909b920e1f&scope=user:email">github登陆</a>
+                <span>|</span>
+                <a>找回账号</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

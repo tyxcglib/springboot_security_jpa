@@ -21,9 +21,11 @@ public class MenuFilter implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        List<Menu> menus = menuService.findMenuByLoginUser();
-        request.setAttribute("menus",menus);
-        System.out.println(menus);
+        if(request.getRequestURL().indexOf("login")==-1){
+            List<Menu> menus = menuService.findMenuByLoginUser();
+            request.setAttribute("menus",menus);
+            System.out.println(menus);
+        }
         return true;
     }
 }

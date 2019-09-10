@@ -9,7 +9,8 @@ public class GlobeExceptionHandler   {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public String exception(){
+    public String exception(Exception e){
+        e.printStackTrace();
         return "权限不足";
     }
 

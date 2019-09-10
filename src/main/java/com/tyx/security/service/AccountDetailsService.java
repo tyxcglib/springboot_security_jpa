@@ -22,9 +22,9 @@ public class AccountDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findUserByUserName( username );
+        User user = userService.findUserByUserName(username );
         if (user == null) {
-            throw new UsernameNotFoundException( "用户名或密码错误" );
+                throw new UsernameNotFoundException( "用户名不存在");
         }
         return user;
     }

@@ -5,6 +5,7 @@ import com.tyx.security.pojo.Menu;
 import com.tyx.security.pojo.Role;
 import com.tyx.security.pojo.User;
 import com.tyx.security.service.MenuService;
+import com.tyx.security.service.RoleService;
 import com.tyx.security.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
@@ -86,7 +88,35 @@ public class test {
         set.add(role3);
         user2.setRoles(set);
         userService.addUser(user2);
+    }
+
+    @Autowired
+    private RoleService roleService;
+
+    @Test
+    public void test2(){
+        Menu menu = new Menu();
+        menu.setMenuName("角色管理");
+        menu.setMorder(1);
+        menu.setUrl("/system/role");
+        menu.setParentId(3);
+        Menu menu2 = new Menu();
+        menu2.setMenuName("菜单管理");
+        menu2.setMorder(2);
+        menu2.setUrl("/system/menu");
+        menu2.setParentId(3);
+        menu.setRoleSet(null);
+        menu2.setRoleSet(null);
+        menuService.addMenu(menu);
+        menuService.addMenu(menu2);
+        Role role = roleService.findRoleByRID(3);
+        Set<Menu> menuSet = role.getMenuSet();
+        menuSet.add(menu);
+        menuSet.add(menu2);
+        role.setMenuSet(menuSet);
+        roleService.saveRole(role);
 
     }
+
 
 }

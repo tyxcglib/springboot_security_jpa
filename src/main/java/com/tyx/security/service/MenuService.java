@@ -6,7 +6,6 @@ import com.tyx.security.pojo.Role;
 import com.tyx.security.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,12 +25,20 @@ public class MenuService {
     public void addMenu(Menu menu){
         menuDao.save(menu);
     }
+
+    /**
+     *  添加子菜单
+     */
+    public void addChildMenu(int pid,Menu child){
+        child.setParentId(pid);
+        menuDao.save(child);
+    }
     /**
      *  用户 --》 角色--》 菜单
      */
     public List<Menu> findMenuByLoginUser(){
-        UserDetails userDetails=(UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.findUserByUserName(userDetails.getUsername());
+        User user=(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = userService.findUserByUserName(userDetails.getUsername());
         // menus当前角色的所有菜单项
         Set<Menu> menus=new HashSet<>();
         for (Role role : user.getRoles()) {
@@ -65,11 +72,12 @@ public class MenuService {
         return menuChilds;
     }
 
+    // 对菜单排序
     public void sortMenuByOrder(List<Menu> menu){
         menu.sort(new Comparator<Menu>() {
             @Override
             public int compare(Menu menu, Menu t1) {
-                if(menu.getOrder()>t1.getOrder()){
+                if(menu.getMorder()>t1.getMorder()){
                     return 1;
                 }
                 else{

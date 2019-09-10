@@ -21,4 +21,8 @@ public class UserService {
     public User findUserByUserName(String username) {
         return userDao.findUserByUserName(username);
     }
+    // 通过githubID查找
+    public User findUserByGithubID(int githubID){
+        return userDao.findUserByGithubId(githubID);
+    }
 }

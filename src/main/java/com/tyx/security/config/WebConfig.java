@@ -16,6 +16,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(menuFilter).addPathPatterns("/**");
+        registry.addInterceptor(menuFilter).addPathPatterns("/**").excludePathPatterns("/plugins/**");
     }
 }
