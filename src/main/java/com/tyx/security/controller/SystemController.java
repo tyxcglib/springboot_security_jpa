@@ -17,4 +17,15 @@ public class SystemController {
         return "system ok";
     }
 
+    @ResponseBody
+    @RequestMapping("/role")
+    public String test2(){
+        return "role ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/menu")
+    public String test3(){
+        return "menu ok";
+    }
 }
