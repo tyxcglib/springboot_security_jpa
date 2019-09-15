@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单栏</title>
+</head>
+<body>
+    <th:block th:fragment="sidebar">
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed"  th:each="menu:${menus}">
+                        <a class="" href="javascript:void(0)" th:text="${menu.menuName}">所有商品</a>
+                        <!-- 子菜单-->
+                        <th:block th:if="${#strings.toString(menu.children).length()}>4">
+                            <dl class="layui-nav-child">
+                                <th:block th:each="me:${menu.children}">
+                                    <dd><a  th:href="${me.url}" th:text="${me.menuName}">列表一</a></dd>
+                                </th:block>
+                            </dl>
+                        </th:block>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>
